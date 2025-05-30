@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: music-recommender
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn music_recommender.wsgi:application
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.0
+      - key: DJANGO_SETTINGS_MODULE
+        value: music_recommender.settings
+      - key: SECRET_KEY
+        generateValue: true
+      - key: WEB_CONCURRENCY
+        value: 4 
